@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AbcRestaurantSystemApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(AbcRestaurantSystemApplication.class, args);
+
+		System.out.println("AMMA");
 	}
 
 }
