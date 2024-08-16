@@ -1,9 +1,15 @@
 package com.example.abc_restaurant_system.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +24,8 @@ public class Category {
 
     @Column(name = "active_state",columnDefinition = "TINYINT default 0")
     private Boolean isActive;
+
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
+    private Set<Item> items;
 }

@@ -37,6 +37,13 @@ public class User {
     private Boolean isActive;
 
 
-    @OneToMany(mappedBy = "createdUser")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
     private Set<Category> categories;
+
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
+    private Set<Item> items;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
+    private Set<Branch> branches;
 }
