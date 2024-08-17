@@ -45,9 +45,6 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
     private Set<Item> items;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
-    private Set<Branch> branches;
-
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "User_Role",
             joinColumns = {
@@ -59,4 +56,10 @@ public class User {
 
     )
     private Set<Role> roles;
+
+    @OneToOne()
+
+    @JoinColumn(name = "branch_id",nullable = true)
+
+    private Branch branch;
 }

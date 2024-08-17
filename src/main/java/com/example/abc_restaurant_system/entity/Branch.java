@@ -2,6 +2,7 @@ package com.example.abc_restaurant_system.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Branch {
 
     @Id
@@ -29,31 +31,6 @@ public class Branch {
     private Boolean isActive;
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "branch_item",
-            joinColumns = @JoinColumn(name = "branch_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-
-    private Set<Item> items = new HashSet<>();
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "branch_category",
-            joinColumns = @JoinColumn(name = "branch_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-
-    private Set<Category> categories = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "branch_user",
-            joinColumns = @JoinColumn(name = "branch_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id_id")
-    )
-
-    private Set<User> users = new HashSet<>();
 }
