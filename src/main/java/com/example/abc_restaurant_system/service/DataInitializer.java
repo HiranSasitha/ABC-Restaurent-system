@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.*;
 
-@Configuration
+@Service
 public class DataInitializer {
 
     @Autowired
@@ -29,9 +31,8 @@ public class DataInitializer {
     private BranchRepository branchRepository;
 
 
-    @Bean
-    CommandLineRunner initRoles() {
-        return args -> {
+@Transactional
+        public void  dataInitials() {
             if (userRoleRepository.findByRoleName("ROLE_ADMIN").isEmpty()) {
                 Role role = new Role();
                 role.setRoleName("ROLE_ADMIN");
@@ -44,15 +45,20 @@ public class DataInitializer {
                 role.setRoleDescription("admin in branch");
                 userRoleRepository.save(role);
             }
-            if (userRoleRepository.findByRoleName("USER").isEmpty()) {
+            if (userRoleRepository.findByRoleName("ROLE_USER").isEmpty()) {
                 Role role = new Role();
-                role.setRoleName("USER");
+                role.setRoleName("ROLE_USER");
                 role.setRoleDescription("customer in branch");
                 userRoleRepository.save(role);
             }
 
             if (!userRepository.existsByUserName("admin")) {
                 User user = new User();
+                Optional<Role> role = userRoleRepository.findByRoleName("ROLE_ADMIN");
+                Set<Role> roles = new HashSet<>();
+                if (role.isPresent()) {
+                    roles.add(role.get());
+                }
                 String hasPassword = passwordEncoder.encode("a");
                 user.setUserName("admin");
                 user.setBranch(null);
@@ -64,19 +70,21 @@ public class DataInitializer {
                 user.setCreatedDate(new Date());
                 user.setIsActive(true);
                 user.setPassword(hasPassword);
+                user.setRoles(roles);
 
                 userRepository.save(user);
             }
 
-            if(!branchRepository.existsByName("Head Office")){
+            if (!branchRepository.existsByName("Head Office")) {
                 Branch branch = new Branch();
                 branch.setName("Head Office");
                 branch.setCreatedUser(userRepository.findByUserName("admin"));
                 branch.setCreatedDate(new Date());
                 branch.setIsActive(true);
+                branchRepository.save(branch);
             }
 
-        };
-    }
+
+        }
 
 }
