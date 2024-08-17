@@ -1,9 +1,10 @@
 package com.example.abc_restaurant_system.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 

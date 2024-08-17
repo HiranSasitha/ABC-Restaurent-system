@@ -1,9 +1,10 @@
 package com.example.abc_restaurant_system.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,4 +47,13 @@ public class Branch {
     )
 
     private Set<Category> categories = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "branch_user",
+            joinColumns = @JoinColumn(name = "branch_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id_id")
+    )
+
+    private Set<User> users = new HashSet<>();
 }
