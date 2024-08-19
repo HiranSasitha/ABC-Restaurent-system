@@ -1,6 +1,7 @@
 package com.example.abc_restaurant_system.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,10 +40,12 @@ public class User {
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
+    @JsonIgnore
     private Set<Category> categories;
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "createdUser")
+    @JsonIgnore
     private Set<Item> items;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
