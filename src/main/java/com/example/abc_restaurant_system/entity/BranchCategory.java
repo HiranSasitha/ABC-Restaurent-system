@@ -5,17 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class Role {
+@Table(name = "branch_category")
+public class BranchCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String roleName;
-    @Column(name = "role_description")
-    private String roleDescription;
-}
+    @ManyToOne
+    @JoinColumn(name = "branch_id",nullable = false)
+    private Branch branch;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id",nullable = false)
+    private Category category;
+}

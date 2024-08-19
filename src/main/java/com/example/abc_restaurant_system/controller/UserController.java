@@ -1,0 +1,47 @@
+package com.example.abc_restaurant_system.controller;
+
+import com.example.abc_restaurant_system.dto.CreateUserDto;
+import com.example.abc_restaurant_system.service.DataInitializer;
+import com.example.abc_restaurant_system.service.UserService;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.PostConstruct;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private DataInitializer dataInitializer;
+
+    @Autowired
+    private UserService userService;
+
+    @PostConstruct
+    public void setDataInitialize(){
+        dataInitializer.dataInitials();
+    }
+
+    @PostMapping("/register-new-user")
+    public ResponseEntity<?> registerNewUser(@RequestBody CreateUserDto user) {
+
+        JSONObject jsonObject = new JSONObject();
+        String msg = userService.saveCustomer(user);
+
+        jsonObject.put("msg",msg);
+
+        if (msg.equals("Success Register")) {
+
+            return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
+        }
+    }
+}

@@ -1,10 +1,11 @@
 package com.example.abc_restaurant_system.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "created_date",columnDefinition = "DATETIME")
     private Date createdDate;
@@ -26,7 +27,7 @@ public class Order {
     @Column(nullable = false)
     private Double total;
 
-    @Column(nullable = false,name = "tax(%)")
+    @Column(nullable = false,name = "tax")
     private Double tax;
 
     @Column(name ="discount")
@@ -38,4 +39,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
     private User userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_id",nullable = false)
+    private Branch branch;
 }
