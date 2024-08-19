@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -58,5 +59,48 @@ public class CategoryServiceImpl implements CategoryService {
             return "user name is invalid";
         }
 
+    }
+
+    @Override
+    public List<Category> getAll() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public String updateCategory(CategoryDto categoryDto,Integer id) {
+        User user = userRepository.findByUserName(categoryDto.getUserName());
+
+        Category category = categoryRepository.findById(id).get();
+
+        if(user!= null){
+
+            if(!categoryRepository.existsByName(categoryDto.getName())||category.getName().equals(categoryDto.getName())) {
+
+                Set<Role> roleSet = new HashSet<>();
+                roleSet = user.getRoles();
+                Role role = roleSet.iterator().next();
+
+                if (role.getRoleName().equals("ROLE_ADMIN")) {
+
+
+                    category.setName(categoryDto.getName());
+                    category.setDescription(categoryDto.getDescription());
+                    category.setIsActive(categoryDto.getIsActivate());
+                    category.setCreatedDate(new Date());
+                    category.setCreatedUser(user);
+                    categoryRepository.save(category);
+
+                    return "Success Updated";
+
+                } else {
+                    return "You don't have permission create category";
+                }
+            }else {
+                return "category name is already exists";
+            }
+
+        }else {
+            return "user name is invalid";
+        }
     }
 }
