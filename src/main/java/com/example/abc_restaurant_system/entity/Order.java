@@ -39,4 +39,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
     private User userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_id",nullable = false)
+    private Branch branch;
 }
