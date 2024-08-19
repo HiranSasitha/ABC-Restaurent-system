@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class createUserDto {
+public class CreateUserDto {
 
     private String userName;
 
@@ -23,4 +23,8 @@ public class createUserDto {
     private String contactNumb;
 
     private String address;
+
+    private Integer branchId;
+
+    private Integer roleId;
 }
