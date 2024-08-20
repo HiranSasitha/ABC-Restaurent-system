@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveCategory(@RequestBody CategoryDto categoryDto){
         JSONObject jsonObject = new JSONObject();
 
@@ -30,6 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){
         List<Category> categories = categoryService.getAll();
 
@@ -37,6 +40,7 @@ public class CategoryController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateCategory(@PathVariable Integer id,@RequestBody CategoryDto categoryDto){
         JSONObject jsonObject = new JSONObject();
 
