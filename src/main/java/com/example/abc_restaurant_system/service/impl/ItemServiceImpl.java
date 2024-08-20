@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -129,5 +130,15 @@ public class ItemServiceImpl implements ItemService {
             return "user is invalid";
         }
 
+    }
+
+    @Override
+    public List<Item> getAll() {
+        return itemRepo.findAll();
+    }
+
+    @Override
+    public List<BranchItem> getBranchByItem(Integer itemId) {
+        return itemBranchRepo.findAllByItem_Id(itemId);
     }
 }
