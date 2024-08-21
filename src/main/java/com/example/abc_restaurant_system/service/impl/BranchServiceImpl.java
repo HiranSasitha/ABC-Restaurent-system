@@ -6,6 +6,7 @@ import com.example.abc_restaurant_system.repository.*;
 import com.example.abc_restaurant_system.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
+    @Transactional
     public String save(BranchDto branchDto) {
         User user = userRepository.findByUserName(branchDto.getCreatedUser());
 
@@ -70,6 +72,7 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
+    @Transactional
     public String update(BranchDto branchDto,Integer branchId) {
         User user = userRepository.findByUserName(branchDto.getCreatedUser());
 
