@@ -1,6 +1,7 @@
 package com.example.abc_restaurant_system.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,6 @@ public class Category {
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
+    @JsonIgnore
     private Set<Item> items;
 }

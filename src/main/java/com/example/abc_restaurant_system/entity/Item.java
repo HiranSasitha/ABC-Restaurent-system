@@ -26,10 +26,6 @@ public class Item {
     @Column(nullable = false)
     private Double sellingPrice;
 
-    @Column(nullable = false)
-    private Double discount;
-
-
 
     @Column(name = "created_date",columnDefinition = "DATETIME")
     private Date createdDate;
