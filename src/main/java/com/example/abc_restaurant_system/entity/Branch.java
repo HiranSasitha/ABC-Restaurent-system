@@ -20,6 +20,7 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String location;
     @Column(name = "created_date",columnDefinition = "DATETIME")
     private Date createdDate;
     @ManyToOne

@@ -141,4 +141,9 @@ public class ItemServiceImpl implements ItemService {
     public List<BranchItem> getBranchByItem(Integer itemId) {
         return itemBranchRepo.findAllByItem_Id(itemId);
     }
+
+    @Override
+    public List<BranchItem> getItemByBranch(Integer branchId) {
+        return itemBranchRepo.findAllByBranch_Id(branchId);
+    }
 }

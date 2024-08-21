@@ -50,6 +50,14 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @GetMapping("/get-all-item-by-branch/{id}")
+    public ResponseEntity<?> getAllItemByBranch(@PathVariable Integer id){
+
+        List<BranchItem> items = itemService.getItemByBranch(id);
+
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateCategory(@RequestBody ItemDto itemDto,@PathVariable Integer id){

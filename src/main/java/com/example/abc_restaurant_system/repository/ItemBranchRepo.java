@@ -10,5 +10,9 @@ public interface ItemBranchRepo extends JpaRepository<BranchItem,Integer> {
 
     void deleteAllByItem_Id(Integer id);
 
+    void deleteAllByBranch_Id(Integer id);
+
     List<BranchItem> findAllByItem_Id(Integer itemId);
+
+    List<BranchItem> findAllByBranch_Id(Integer branch);
 }
