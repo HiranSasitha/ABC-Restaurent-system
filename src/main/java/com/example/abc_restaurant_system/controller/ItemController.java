@@ -50,5 +50,17 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateCategory(@RequestBody ItemDto itemDto,@PathVariable Integer id){
+        JSONObject jsonObject = new JSONObject();
+
+        String msg = itemService.update(itemDto,id);
+
+        jsonObject.put("msg",msg);
+
+        return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
+    }
+
 
 }
