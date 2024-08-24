@@ -1,5 +1,6 @@
 package com.example.abc_restaurant_system.controller;
 
+import com.example.abc_restaurant_system.dto.BranchDto;
 import com.example.abc_restaurant_system.dto.CreateUserDto;
 import com.example.abc_restaurant_system.entity.User;
 import com.example.abc_restaurant_system.service.DataInitializer;
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -50,5 +52,18 @@ public class UserController {
         List<User> users = userService.findAll();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PostMapping("/update/{id}/{isActive}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateUserStatus(@PathVariable Integer id,@PathVariable Boolean
+                                              isActive){
+        JSONObject jsonObject = new JSONObject();
+
+        String msg = userService.updateStatus(id,isActive);
+
+        jsonObject.put("msg",msg);
+
+        return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
     }
 }

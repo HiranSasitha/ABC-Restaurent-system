@@ -12,4 +12,6 @@ public interface UserService {
     String saveCustomer(CreateUserDto user);
 
     List<User> findAll();
+
+    String updateStatus(Integer id, Boolean isActive);
 }
