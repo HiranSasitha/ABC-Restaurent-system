@@ -32,7 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasRole('ADMIN')")
+
     public ResponseEntity<?> getAll(){
         List<Category> categories = categoryService.getAll();
 

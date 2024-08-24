@@ -15,4 +15,7 @@ public interface ItemBranchRepo extends JpaRepository<BranchItem,Integer> {
     List<BranchItem> findAllByItem_Id(Integer itemId);
 
     List<BranchItem> findAllByBranch_Id(Integer branch);
+
+
+    List<BranchItem> findAllByBranch_IdAndItem_Category_IdAndIsActive(Integer id, Integer categoryId, boolean isActive);
 }

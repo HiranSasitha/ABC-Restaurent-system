@@ -70,5 +70,13 @@ public class ItemController {
         return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
     }
 
+    @GetMapping("/get-all-branch-by-item-by-category/{id}/{categoryId}")
+    public ResponseEntity<?> getAllBranchByItemByCategory(@PathVariable Integer id,@PathVariable Integer categoryId){
+
+        List<BranchItem> items = itemService.getBranchByItemByCategory(id,categoryId);
+
+        return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+
 
 }
