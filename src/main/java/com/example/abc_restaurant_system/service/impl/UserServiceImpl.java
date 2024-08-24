@@ -87,4 +87,22 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public String updateStatus(Integer id, Boolean isActive) {
+
+        User user1 = userRepository.findById(id).get();
+
+
+        if(user1 != null){
+
+            user1.setIsActive(isActive);
+            userRepository.save(user1);
+
+            return "Successfully update user status";
+
+        }else {
+            return  "user invalid";
+        }
+    }
 }

@@ -36,19 +36,19 @@ public class DataInitializer {
             if (userRoleRepository.findByRoleName("ROLE_ADMIN").isEmpty()) {
                 Role role = new Role();
                 role.setRoleName("ROLE_ADMIN");
-                role.setRoleDescription("admin in all branch");
+                role.setRoleDescription("admin");
                 userRoleRepository.save(role);
             }
             if (userRoleRepository.findByRoleName("ROLE_BRANCHADMIN").isEmpty()) {
                 Role role = new Role();
                 role.setRoleName("ROLE_BRANCHADMIN");
-                role.setRoleDescription("admin in branch");
+                role.setRoleDescription("branch-admin");
                 userRoleRepository.save(role);
             }
             if (userRoleRepository.findByRoleName("ROLE_USER").isEmpty()) {
                 Role role = new Role();
                 role.setRoleName("ROLE_USER");
-                role.setRoleDescription("customer in branch");
+                role.setRoleDescription("user");
                 userRoleRepository.save(role);
             }
 
