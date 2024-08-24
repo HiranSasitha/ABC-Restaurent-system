@@ -17,4 +17,6 @@ public interface ItemService {
     List<Item> getAll();
 
     List<BranchItem> getBranchByItem(Integer itemId);
+
+    List<BranchItem> getItemByBranch(Integer branchId);
 }

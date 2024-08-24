@@ -1,18 +1,17 @@
 package com.example.abc_restaurant_system.controller;
 
 import com.example.abc_restaurant_system.dto.CreateUserDto;
+import com.example.abc_restaurant_system.entity.User;
 import com.example.abc_restaurant_system.service.DataInitializer;
 import com.example.abc_restaurant_system.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -43,5 +42,13 @@ public class UserController {
         }else {
             return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAll(){
+
+        List<User> users = userService.findAll();
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
