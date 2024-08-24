@@ -111,4 +111,9 @@ public class BranchServiceImpl implements BranchService {
             return "user is invalid";
         }
     }
+
+    @Override
+    public List<Branch> getAllActive() {
+        return branchRepository.findAllByIsActive(true);
+    }
 }
