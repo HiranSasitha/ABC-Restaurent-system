@@ -20,8 +20,6 @@ public class OrderDetails {
     @Column(nullable = false)
     private Integer qty;
 
-    @Column(nullable = false)
-    private Double discount;
 
     @ManyToOne
     @JoinColumn(name = "order_id",nullable = false)

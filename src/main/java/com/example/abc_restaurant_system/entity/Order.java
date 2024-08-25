@@ -23,15 +23,9 @@ public class Order {
     @Column(name = "created_date",columnDefinition = "DATETIME")
     private Date createdDate;
 
-
     @Column(nullable = false)
     private Double total;
 
-    @Column(nullable = false,name = "tax")
-    private Double tax;
-
-    @Column(name ="discount")
-    private Double discount;
 
     @Column(name = "pay_option")
     private String payOption;
