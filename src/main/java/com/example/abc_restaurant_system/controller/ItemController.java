@@ -78,5 +78,17 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @PutMapping("/update-branch-item-status/{branchId}/{itemId}/{status}")
+
+    public ResponseEntity<?> updateItemBranchStatus(@PathVariable Integer branchId,@PathVariable Integer itemId,@PathVariable Boolean status){
+        JSONObject jsonObject = new JSONObject();
+
+        String msg = itemService.updateBranchItemStatus(branchId,itemId,status);
+
+        jsonObject.put("msg",msg);
+
+        return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
+    }
+
 
 }
