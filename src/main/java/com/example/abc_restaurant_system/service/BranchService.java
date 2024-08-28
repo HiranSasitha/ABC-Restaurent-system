@@ -15,4 +15,5 @@ public interface BranchService {
 
     String update(BranchDto branchDto,Integer id);
 
+    List<Branch> getAllActive();
 }

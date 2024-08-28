@@ -32,7 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasRole('ADMIN')")
+
     public ResponseEntity<?> getAll(){
         List<Category> categories = categoryService.getAll();
 
@@ -49,5 +49,13 @@ public class CategoryController {
         jsonObject.put("msg",msg);
 
         return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-all-active")
+
+    public ResponseEntity<?> getAllActive(){
+        List<Category> categories = categoryService.getAllActive();
+
+        return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 }

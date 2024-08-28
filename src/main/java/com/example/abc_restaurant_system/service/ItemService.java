@@ -19,4 +19,8 @@ public interface ItemService {
     List<BranchItem> getBranchByItem(Integer itemId);
 
     List<BranchItem> getItemByBranch(Integer branchId);
+
+    List<BranchItem> getBranchByItemByCategory(Integer id, Integer categoryId);
+
+    String updateBranchItemStatus(Integer branchId, Integer itemId,Boolean status);
 }

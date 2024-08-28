@@ -14,4 +14,6 @@ public interface CategoryService {
     List<Category> getAll();
 
     String updateCategory(CategoryDto categoryDto,Integer id);
+
+    List<Category> getAllActive();
 }

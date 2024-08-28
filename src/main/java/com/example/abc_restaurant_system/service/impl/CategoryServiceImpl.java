@@ -103,4 +103,9 @@ public class CategoryServiceImpl implements CategoryService {
             return "user name is invalid";
         }
     }
+
+    @Override
+    public List<Category> getAllActive() {
+        return categoryRepository.findAllByIsActive(true);
+    }
 }

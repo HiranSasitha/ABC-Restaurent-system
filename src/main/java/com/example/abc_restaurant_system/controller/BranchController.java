@@ -30,6 +30,14 @@ public class BranchController {
         return new ResponseEntity<>(branches, HttpStatus.OK);
     }
 
+    @GetMapping("/get-all-active")
+    public ResponseEntity<?> getAllActive(){
+
+        List<Branch> branches = branchService.getAllActive();
+
+        return new ResponseEntity<>(branches, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> saveCategory(@RequestBody BranchDto branchDto){
