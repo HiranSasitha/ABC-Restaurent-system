@@ -50,4 +50,12 @@ public class CategoryController {
 
         return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
     }
+
+    @GetMapping("/get-all-active")
+
+    public ResponseEntity<?> getAllActive(){
+        List<Category> categories = categoryService.getAllActive();
+
+        return new ResponseEntity<>(categories,HttpStatus.OK);
+    }
 }

@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public String save(OrderDto orderDto) {
 
-        User user = userRepository.findByUserName(orderDto.getUseName());
+        User user = userRepository.findByUserName(orderDto.getUserName());
         Branch branch = branchRepository.findById(orderDto.getBranchId()).get();
 
         List<OrderItemDto> orderItemDtos = orderDto.getOrderItemDtos();

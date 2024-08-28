@@ -6,7 +6,7 @@ import java.util.List;
 @Data
 public class OrderDto {
 
-  private String useName;
+  private String userName;
 
   private String payOption;
 
