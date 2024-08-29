@@ -6,15 +6,20 @@ import com.example.abc_restaurant_system.entity.*;
 import com.example.abc_restaurant_system.repository.*;
 import com.example.abc_restaurant_system.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -37,9 +42,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     @Override
     @Transactional
-    public String save(OrderDto orderDto) {
+    public String save(OrderDto orderDto) throws JRException, IOException {
 
         User user = userRepository.findByUserName(orderDto.getUserName());
         Branch branch = branchRepository.findById(orderDto.getBranchId()).get();
@@ -89,6 +97,7 @@ public class OrderServiceImpl implements OrderService {
             orderStatus.setIsStatus(false);
              orderStatusRepository.save(orderStatus);
 
+             this.exportReport(order);
 
             return "Successfully";
 
@@ -161,5 +170,23 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
 
+    }
+
+    @Override
+    public void exportReport(Order order) throws IOException, JRException {
+        List<Order> orders = new ArrayList<>();
+        orders.add(order);
+        Resource resource = resourceLoader.getResource("classpath:reports/order.jrxml");
+        InputStream inputStream = resource.getInputStream();
+        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orders);
+        Map<String,Object> parameters = new HashMap<>();
+        parameters.put("create By","Hiran");
+
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,dataSource );
+
+        JasperExportManager.exportReportToPdfFile(jasperPrint,"C:\\Users\\hiran\\OneDrive\\Desktop"+"\\abc_restaurant.pdf");
     }
 }
