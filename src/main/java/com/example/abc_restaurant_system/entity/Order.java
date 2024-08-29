@@ -26,6 +26,10 @@ public class Order {
     @Column(nullable = false)
     private Double total;
 
+    @Column(name = "order_option")
+    private String orderOption;
+    @Column(name = "booking_seat")
+    private Integer bookingSeat;
 
     @Column(name = "pay_option")
     private String payOption;

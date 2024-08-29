@@ -10,6 +10,10 @@ public class OrderDto {
 
   private String payOption;
 
+  private Integer bookingSeat;
+
+  private String orderOption;
+
   private Integer branchId;
 
   private List<OrderItemDto> orderItemDtos;

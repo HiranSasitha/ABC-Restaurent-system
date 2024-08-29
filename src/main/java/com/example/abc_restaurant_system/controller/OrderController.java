@@ -51,4 +51,10 @@ public class OrderController {
         return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
     }
 
+    @GetMapping("/get-available-seat/{branchId}")
+        public Integer getaAvailableSeat(@PathVariable Integer branchId){
+
+        return orderService.getAvailableSeat(branchId);
+        }
+
 }

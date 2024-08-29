@@ -13,4 +13,6 @@ public interface OrderService {
     List<OrderStatus> getAllOrderStatus();
 
     String updateOrderStatus(Integer id, Boolean status);
+
+    Integer getAvailableSeat(Integer branchId);
 }

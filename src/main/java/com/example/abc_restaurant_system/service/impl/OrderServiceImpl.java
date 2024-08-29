@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +53,12 @@ public class OrderServiceImpl implements OrderService {
             order.setCreatedDate(new Date());
             order.setUserEntity(user);
             order.setPayOption(orderDto.getPayOption());
+            order.setOrderOption(orderDto.getOrderOption());
+            if(orderDto.getBookingSeat() != -1){
+                order.setBookingSeat(orderDto.getBookingSeat());
+            }else {
+                order.setBookingSeat(null);
+            }
             order.setTotal(0.0);
 
             for (OrderItemDto orderItemDto:orderItemDtos){
@@ -103,5 +113,38 @@ public class OrderServiceImpl implements OrderService {
 
         return "Success Update Order";
 
+    }
+
+    @Override
+    public Integer getAvailableSeat(Integer branchId) {
+
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime endOfDay = today.atTime(LocalTime.MAX);
+
+        Date startDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+
+        System.out.println(startDate);
+        System.out.println(endDate);
+
+
+        Branch branch = branchRepository.findById(branchId).get();
+
+        Integer totalSeat = branch.getSeat();
+
+        Integer booking = 0;
+
+        List<Order> orders = orderRepository.findAllByBranchIdAndCreatedDate(branchId, startDate, endDate);
+
+        for (Order order:orders){
+            if(order.getBookingSeat() != null){
+                booking+=order.getBookingSeat();
+            }
+
+        }
+
+        Integer availableSeats = totalSeat-booking;
+        return availableSeats;
     }
 }

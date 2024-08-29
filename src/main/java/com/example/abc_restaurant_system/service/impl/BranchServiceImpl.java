@@ -44,6 +44,7 @@ public class BranchServiceImpl implements BranchService {
               branch.setCreatedUser(user);
               branch.setCreatedDate(new Date());
               branch.setName(branchDto.getName());
+              branch.setSeat(branchDto.getSeat());
               branch.setLocation(branchDto.getLocation());
               branchRepository.save(branch);
 
@@ -84,6 +85,7 @@ public class BranchServiceImpl implements BranchService {
             branch.setCreatedUser(user);
             branch.setCreatedDate(new Date());
             branch.setName(branchDto.getName());
+            branch.setSeat(branchDto.getSeat());
             branch.setLocation(branchDto.getLocation());
             branchRepository.save(branch);
 

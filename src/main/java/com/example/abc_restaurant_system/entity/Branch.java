@@ -21,6 +21,8 @@ public class Branch {
     private Integer id;
     private String name;
     private String location;
+    @Column(name = "seat")
+    private Integer seat;
     @Column(name = "created_date",columnDefinition = "DATETIME")
     private Date createdDate;
     @ManyToOne
