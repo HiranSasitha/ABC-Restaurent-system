@@ -15,4 +15,6 @@ public interface OrderService {
     String updateOrderStatus(Integer id, Boolean status);
 
     Integer getAvailableSeat(Integer branchId);
+
+    List<OrderStatus> getOrdersByUser(String userName);
 }

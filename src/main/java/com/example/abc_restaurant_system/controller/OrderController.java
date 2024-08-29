@@ -57,4 +57,10 @@ public class OrderController {
         return orderService.getAvailableSeat(branchId);
         }
 
+    @GetMapping("/get-orders-by-user/{userName}")
+    public List<OrderStatus> getOrdersByUser(@PathVariable String userName){
+
+        return orderService.getOrdersByUser(userName);
+    }
+
 }

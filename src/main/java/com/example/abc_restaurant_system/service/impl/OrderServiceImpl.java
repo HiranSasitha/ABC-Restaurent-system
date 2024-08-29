@@ -147,4 +147,19 @@ public class OrderServiceImpl implements OrderService {
         Integer availableSeats = totalSeat-booking;
         return availableSeats;
     }
+
+    @Override
+    public List<OrderStatus> getOrdersByUser(String userName) {
+
+        User user = userRepository.findByUserName(userName);
+        if(user != null){
+
+            return orderStatusRepository.findAllByOrder_UserEntity_Id(user.getId());
+
+
+        }else {
+            return null;
+        }
+
+    }
 }
