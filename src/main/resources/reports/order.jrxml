@@ -81,7 +81,7 @@
                 <textElement>
                     <font isBold="false"/>
                 </textElement>
-                <text><![CDATA[pay_option]]></text>
+                <text><![CDATA[pay option]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" x="158" y="7" width="79" height="18" forecolor="#000000" uuid="c826347b-9dc0-43a0-b4e3-f81124966f8b">
@@ -117,7 +117,7 @@
                 <textElement>
                     <font isBold="false"/>
                 </textElement>
-                <text><![CDATA[booking_seat]]></text>
+                <text><![CDATA[booking seat]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" x="474" y="7" width="79" height="18" forecolor="#000000" uuid="d455f8bc-e21b-4bfe-8ff7-fff7834a2451">
@@ -126,7 +126,7 @@
                 <textElement>
                     <font isBold="false"/>
                 </textElement>
-                <text><![CDATA[order_type]]></text>
+                <text><![CDATA[order type]]></text>
             </staticText>
         </band>
     </columnHeader>
@@ -158,28 +158,29 @@
                 <textElement>
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{orderOption}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{userEntity.userName}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement style="Detail" x="320" y="0" width="80" height="20" uuid="bc9f65b4-18b0-4b95-82a1-d3a78b9c9068"/>
                 <textElement>
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bookingSeat}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{branch.name}]]></textFieldExpression>
+
             </textField>
             <textField>
                 <reportElement style="Detail" x="400" y="0" width="80" height="20" uuid="e8e08f5f-8f12-4e0b-8c7e-d0b8a4c31b65"/>
                 <textElement>
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{userEntity.userName}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bookingSeat}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement style="Detail" x="480" y="0" width="80" height="20" uuid="8e12b4bb-b7f1-4b36-8a2f-c4c26b9d0742"/>
                 <textElement>
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{branch.name}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{orderOption}]]></textFieldExpression>
             </textField>
         </band>
     </detail>
