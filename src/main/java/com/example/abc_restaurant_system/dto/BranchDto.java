@@ -17,6 +17,8 @@ public class BranchDto {
 
     private String createdUser;
 
+    private Integer seat;
+
     private Boolean isActive;
 
     private List<Integer> itemId;

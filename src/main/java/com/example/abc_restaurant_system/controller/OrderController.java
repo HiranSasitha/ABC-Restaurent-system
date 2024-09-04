@@ -4,6 +4,7 @@ import com.example.abc_restaurant_system.dto.BranchDto;
 import com.example.abc_restaurant_system.dto.OrderDto;
 import com.example.abc_restaurant_system.entity.OrderStatus;
 import com.example.abc_restaurant_system.service.OrderService;
+import net.sf.jasperreports.engine.JRException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,7 +24,7 @@ public class OrderController {
 
     @PostMapping("/create")
 
-    public ResponseEntity<?> save(@RequestBody OrderDto orderDto){
+    public ResponseEntity<?> save(@RequestBody OrderDto orderDto) throws JRException, IOException {
         JSONObject jsonObject = new JSONObject();
 
         String msg = orderService.save(orderDto);
@@ -49,6 +51,18 @@ public class OrderController {
         jsonObject.put("msg",msg);
 
         return new ResponseEntity<>(jsonObject.toString(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-available-seat/{branchId}")
+        public Integer getaAvailableSeat(@PathVariable Integer branchId){
+
+        return orderService.getAvailableSeat(branchId);
+        }
+
+    @GetMapping("/get-orders-by-user/{userName}")
+    public List<OrderStatus> getOrdersByUser(@PathVariable String userName){
+
+        return orderService.getOrdersByUser(userName);
     }
 
 }
